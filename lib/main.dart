@@ -1,30 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanager/TaskUI.dart';
+import 'package:taskmanager/TaskFunction.dart';
+import 'package:taskmanager/HomeScreen.dart';
+import 'package:taskmanager/TaskManagerScreen.dart';
 
 void main() => runApp(MyApp());
-
+//Main
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
+
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        body:Text("Fsd"),)
+        body: ManagerTask(),
+    )
     );
   }
 }
+//Update forms
+class ManagerTask extends StatefulWidget{
+  @override
+  //Creates point for dynamic update static tree
+  _ManagerTask createState() => _ManagerTask();
+}
 
 
+//Bottom panel
+class _ManagerTask extends State<ManagerTask>{
+  var screens = [
+    HomeScreen(),
+  ];
+  int selectTab = 0;
+  @override
+  // TODO: implement widget
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.question_answer),
+              title: Text("title2")
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.question_answer),
+              title: Text("title")
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.question_answer),
+              title: Text("")
+          ),
+        ],
+        onTap: (index){
+          setState(() {
+            selectTab = index;
+          });
+        }
+        ,
+
+      ),
+      body:   screens[selectTab],
+    );
+  }
+}
 
